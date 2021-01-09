@@ -1,6 +1,6 @@
 <template>
   <div class="topBar">
-    <span class="logo">V</span>
+    <span class="logo" v-on:click="getChangeTest('我不是标题')">V</span>
     <input type="search" placeholder="Search...">
     <div class="menu">
       <a v-for="menu in menus" :class="{'menu-item':true, 'activeRoute': activeRoute === menu.route?true:false}"
@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {mapActions} from 'vuex';
 
 export default Vue.extend({
   name: 'TopBar',
@@ -25,6 +26,13 @@ export default Vue.extend({
       ],
       activeRoute: null
     };
+  },
+  methods: {
+    ...mapActions('test', ['getChangeTest'])
+    // test() {
+    //   this.$store.dispatch('test/getChangeTest', '我不是标题');
+    //   console.log('点击');
+    // }
   },
   watch: {
     '$route': {

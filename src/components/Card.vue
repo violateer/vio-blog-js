@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="title">
-      <a href="#">我是标题我是标题</a>
+      <a href="#">{{ article.title }}</a>
       <div class="description">
         <a href="#" class="date">
           <svg class="icon" aria-hidden="true">
@@ -34,9 +34,25 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {mapActions, mapGetters, mapState} from 'vuex';
 
 export default Vue.extend({
-  name: 'Card'
+  name: 'Card',
+  data() {
+    return {};
+  },
+  computed: {
+    // ...mapState({
+    //   article: state => state.test.test
+    // })
+    // 从modules/test.js里面执行getTest
+    ...mapGetters('test', {article: 'getTest'})
+    // article() {
+    //   return {
+    //     title: this.$store.getters.getTest
+    //   };
+    // }
+  }
 });
 </script>
 
