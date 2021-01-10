@@ -14,8 +14,8 @@ import Card from '@/components/Card.vue';
 
 export default Vue.extend({
   name: 'Home',
-  created () {
-    const { data } = this.$api.getArticles();
+  async created () {
+    const { data } = await this.$api.getArticles();
     console.log(data);
   },
   components: {
