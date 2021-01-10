@@ -29,10 +29,6 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions('test', ['getChangeTest'])
-    // test() {
-    //   this.$store.dispatch('test/getChangeTest', '我不是标题');
-    //   console.log('点击');
-    // }
   },
   watch: {
     '$route': {
@@ -82,7 +78,7 @@ export default Vue.extend({
     width: 400px;
     border-radius: 20px;
     top: 10px;
-    left: 300px;
+    left: 400px;
     outline: none;
     padding: 0 20px;
 

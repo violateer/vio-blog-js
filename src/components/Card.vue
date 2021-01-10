@@ -58,7 +58,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .card {
-  width: 700px;
+  width: 800px;
   height: 350px;
   //background-color: green;
   margin-top: 40px;
