@@ -1,32 +1,32 @@
 <template>
   <div class="card">
     <div class="title">
-      <a href="#">{{ article.title }}</a>
+      <a href="#">{{ title }}</a>
       <div class="description">
         <a href="#" class="date">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-rili"></use>
           </svg>
-          2020.01.01</a>
-        <a href="#" class="date">
+          {{ date }}</a>
+        <a href="#" class="author">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-ren"></use>
           </svg>
-          作者</a>
-        <a href="#" class="date">
+          {{ author }}</a>
+        <a href="#" class="reviewNum">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-pinglun"></use>
           </svg>
-          评论</a>
-        <a href="#" class="date">
+          {{ reviewNum }}</a>
+        <a href="#" class="pageViews">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-yanjing"></use>
           </svg>
-          阅读量</a>
+          {{ pageViews }}</a>
       </div>
     </div>
     <div class="content">
-      <p>自从开始早起，每天一杯咖啡就成了标配，在我的另一篇文章《咖啡+奶》中聊过，从一开始的3+1速溶进阶到黑咖啡+鲜牛奶，这次我的咖啡体验又升级啦。入了一台胶囊咖啡机…</p>
+      <p>{{ content }}</p>
     </div>
     <button class="btn">Read More</button>
   </div>
@@ -34,25 +34,33 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {mapActions, mapGetters, mapState} from 'vuex';
 
 export default Vue.extend({
   name: 'Card',
+  props: {
+    title: {
+      type: String
+    },
+    date: {
+      type: String
+    },
+    author: {
+      type: String
+    },
+    reviewNum: {
+      type: Number
+    },
+    pageViews: {
+      type: Number
+    },
+    content: {
+      type: String
+    }
+  },
   data() {
     return {};
   },
-  computed: {
-    // ...mapState({
-    //   article: state => state.test.test
-    // })
-    // 从modules/test.js里面执行getTest
-    ...mapGetters('test', {article: 'getTest'})
-    // article() {
-    //   return {
-    //     title: this.$store.getters.getTest
-    //   };
-    // }
-  }
+  computed: {}
 });
 </script>
 
@@ -87,9 +95,18 @@ export default Vue.extend({
 
   .content {
     margin-top: 20px;
+    padding-top: 20px;
 
     p {
+      display: -webkit-box;
+      width: 770px;
+      height: 130px;
+      //background-color: green;
       font-size: 24px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
     }
   }
 

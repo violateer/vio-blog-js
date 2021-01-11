@@ -1,6 +1,6 @@
 <template>
   <div class="topBar">
-    <span class="logo" v-on:click="getChangeTest('我不是标题')">V</span>
+    <span class="logo">V</span>
     <input type="search" placeholder="Search...">
     <div class="menu">
       <a v-for="menu in menus" :class="{'menu-item':true, 'activeRoute': activeRoute === menu.route?true:false}"
@@ -27,9 +27,7 @@ export default Vue.extend({
       activeRoute: null
     };
   },
-  methods: {
-    ...mapActions('test', ['getChangeTest'])
-  },
+  methods: {},
   watch: {
     '$route': {
       handler(route) {
