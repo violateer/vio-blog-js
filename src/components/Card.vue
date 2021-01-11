@@ -38,24 +38,12 @@ import Vue from 'vue';
 export default Vue.extend({
   name: 'Card',
   props: {
-    title: {
-      type: String
-    },
-    date: {
-      type: String
-    },
-    author: {
-      type: String
-    },
-    reviewNum: {
-      type: Number
-    },
-    pageViews: {
-      type: Number
-    },
-    content: {
-      type: String
-    }
+    title: String,
+    date: String,
+    author: String,
+    reviewNum: Number,
+    pageViews: Number,
+    content: String
   },
   data() {
     return {};
