@@ -7,7 +7,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-rili"></use>
           </svg>
-          {{ date }}</a>
+          {{ editDate }}</a>
         <a href="#" class="author">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-ren"></use>
@@ -60,7 +60,11 @@ export default Vue.extend({
   data() {
     return {};
   },
-  computed: {}
+  computed: {
+    editDate() {
+      return this.date.substring(0, 10);
+    }
+  }
 });
 </script>
 
