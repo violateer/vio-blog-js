@@ -44,3 +44,9 @@ a {
     fill: currentColor;
     overflow: hidden;
 }
+
+/* 给路由页面添加上边距 */
+.init {
+    margin-top: 60px;
+    position: relative;
+}

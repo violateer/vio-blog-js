@@ -1,7 +1,26 @@
 <template>
-  <div class="blog w">
-    <h1>This is an Blog page</h1>
+  <div class="blog w init">
+    <MultiCard class="multiCard" :cards="['vue','react','nodeJs']"/>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<script lang="js">
+import Vue from 'vue';
+import MultiCard from '@/components/MultiCard.vue';
+
+export default Vue.extend({
+  name: 'Blog',
+  components: {
+    MultiCard
+  }
+});
+</script>
+
+<style lang="scss" scoped>
+.blog {
+  .multiCard {
+    margin-top: 80px;
+    margin-bottom: 30px;
+  }
+}
+</style>

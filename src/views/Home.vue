@@ -1,5 +1,5 @@
 <template>
-  <div class="home w">
+  <div class="home w init">
     <Card v-for="(article,index) in getArticles"
           :title="article.title"
           :author="article.author"
@@ -42,9 +42,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .home {
-  margin-top: 60px;
-  position: relative;
-
   .calender {
     position: absolute;
     top: 100px;
