@@ -17,12 +17,12 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-pinglun"></use>
           </svg>
-          {{ reviewNum }}</a>
+          {{ reviewNum }}条评论</a>
         <a href="#" class="pageViews">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-yanjing"></use>
           </svg>
-          {{ pageViews }}</a>
+          {{ pageViews }}次浏览</a>
       </div>
     </div>
     <div class="content">

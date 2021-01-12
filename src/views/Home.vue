@@ -47,7 +47,7 @@ export default Vue.extend({
 
   .calender {
     position: absolute;
-    top: 0;
+    top: 100px;
     right: 80px;
     margin-top: 50px;
   }

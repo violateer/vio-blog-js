@@ -1,6 +1,7 @@
 <template>
   <div class="topBar">
     <span class="logo">V</span>
+    <span class="logoTitle">Violateer</span>
     <input type="search" placeholder="Search...">
     <div class="menu">
       <a v-for="menu in menus" :class="{'menu-item':true, 'activeRoute': activeRoute === menu.route?true:false}"
@@ -68,6 +69,14 @@ export default Vue.extend({
       border-color: lighten(black, 30);
       color: lighten(black, 30);
     }
+  }
+
+  .logoTitle {
+    position: absolute;
+    left: 70px;
+    top: 14px;
+    font-size: 21px;
+    cursor: pointer;
   }
 
   input[type="search"] {
