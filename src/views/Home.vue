@@ -34,9 +34,9 @@ export default Vue.extend({
 <style lang="scss" scoped>
 .home {
   .calender {
-    position: absolute;
+    position: fixed;
     top: 100px;
-    right: 80px;
+    right: 140px;
     margin-top: 50px;
   }
 }
