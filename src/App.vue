@@ -10,9 +10,14 @@
 import Vue from 'vue';
 import TopBar from '@/components/TopBar.vue';
 import Footer from '@/components/Footer.vue';
+import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'App',
+  async created () {
+    // 获取所有文章
+    await this.$store.dispatch('articles/actionRequestArticles');
+  },
   components: {
     TopBar, Footer
   }

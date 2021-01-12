@@ -21,15 +21,6 @@ import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'Home',
-  data () {
-    return {
-      articles: []
-    };
-  },
-  async created () {
-    // 获取所有文章
-    await this.$store.dispatch('articles/actionRequestArticles');
-  },
   computed: {
     ...mapGetters({ getArticles: 'articles/watchArticles' })
   },

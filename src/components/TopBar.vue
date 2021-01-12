@@ -1,7 +1,7 @@
 <template>
   <div class="topBar">
-    <span class="logo">V</span>
-    <span class="logoTitle">Violateer</span>
+    <a class="logo" href="/">V</a>
+    <a class="logoTitle" href="/">Violateer</a>
     <input type="search" placeholder="Search...">
     <div class="menu">
       <a v-for="menu in menus" :class="{'menu-item':true, 'activeRoute': activeRoute === menu.route?true:false}"
