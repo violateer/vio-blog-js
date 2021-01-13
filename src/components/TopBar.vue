@@ -20,10 +20,10 @@ export default Vue.extend({
     return {
       menus: [
         {route: '/', tag: '主页'},
-        {route: '/blog', tag: '博客'},
-        {route: '/label', tag: '标签'},
-        {route: '/classification', tag: '分类'},
-        {route: '/contact', tag: '联系'}
+        {route: 'blog', tag: '博客'},
+        {route: 'label', tag: '标签'},
+        {route: 'classification', tag: '分类'},
+        {route: 'contact', tag: '联系'}
       ],
       activeRoute: null
     };
@@ -32,7 +32,7 @@ export default Vue.extend({
   watch: {
     '$route': {
       handler(route) {
-        this.activeRoute = this.$route.path;
+        this.activeRoute = this.$route.path.split('/')[1] || '/';
       }
     }
   }

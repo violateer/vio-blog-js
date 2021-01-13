@@ -12,12 +12,17 @@ const routes = [
     {
         path: '/blog',
         name: 'Blog',
-        component: () => import(/* webpackChunkName: "Blog" */ '../views/Blog.vue'),
+        component: () => import(/* webpackChunkName: "Blog" */ '../views/Blog/Blog.vue'),
         children: [
             {
                 path: 'select',
                 name: 'Select',
-                component: () => import(/* webpackChunkName: "BlogSelect" */ '../views/BlogSelect.vue')
+                component: () => import(/* webpackChunkName: "BlogSelect" */ '../views/Blog/BlogSelect.vue')
+            },
+            {
+                path: 'upload',
+                name: 'Upload',
+                component: () => import(/* webpackChunkName: "BlogUpload" */ '../views/Blog/BlogUpload.vue')
             }
         ]
     },

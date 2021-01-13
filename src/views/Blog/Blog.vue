@@ -1,8 +1,6 @@
 <template>
   <div class="blog w init">
-    <div v-if="routePath[2] === 'select'">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
   </div>
 </template>
 
