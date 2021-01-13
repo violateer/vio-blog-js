@@ -1,5 +1,5 @@
 <template>
-  <div class="calender">
+  <div class="calender" @click="writeArticle">
     <p id="monthName">{{ monthName }}</p>
     <p id="dayName">{{ dayName }}</p>
     <p id="dayNumber">{{ dayNumber }}</p>
@@ -34,6 +34,9 @@ export default Vue.extend({
       this.dayName = date.toLocaleString(lang, { weekday: 'long' });
       this.monthName = date.toLocaleString(lang, { month: 'long' });
       this.year = date.getFullYear();
+    },
+    writeArticle () {
+      this.$router.push('/blog/select');
     }
   }
 });

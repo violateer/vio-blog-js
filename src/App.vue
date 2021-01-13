@@ -2,7 +2,7 @@
   <div id="app">
     <TopBar/>
     <router-view></router-view>
-    <Footer/>
+    <Footer class="footer"/>
   </div>
 </template>
 
@@ -10,7 +10,6 @@
 import Vue from 'vue';
 import TopBar from '@/components/TopBar.vue';
 import Footer from '@/components/Footer.vue';
-import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'App',

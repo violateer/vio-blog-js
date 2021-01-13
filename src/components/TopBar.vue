@@ -48,7 +48,7 @@ export default Vue.extend({
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-  z-index: 2;
+  z-index: 11;
 
   .logo {
     position: relative;

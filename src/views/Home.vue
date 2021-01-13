@@ -39,6 +39,12 @@ export default Vue.extend({
     right: 140px;
     margin-top: 50px;
   }
+
+  .create {
+    position: fixed;
+    bottom: 100px;
+    right: 0px;
+  }
 }
 </style>
 

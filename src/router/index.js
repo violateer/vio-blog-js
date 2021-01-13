@@ -12,7 +12,14 @@ const routes = [
     {
         path: '/blog',
         name: 'Blog',
-        component: () => import(/* webpackChunkName: "Blog" */ '../views/Blog.vue')
+        component: () => import(/* webpackChunkName: "Blog" */ '../views/Blog.vue'),
+        children: [
+            {
+                path: 'select',
+                name: 'Select',
+                component: () => import(/* webpackChunkName: "BlogSelect" */ '../views/BlogSelect.vue')
+            }
+        ]
     },
     {
         path: '/label',

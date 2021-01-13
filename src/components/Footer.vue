@@ -18,6 +18,7 @@ export default Vue.extend({
   font-size: 16px;
   text-align: center;
   padding: 20px 0;
+  position: relative;
 
   a {
     color: #656565;
