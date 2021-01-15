@@ -1,17 +1,17 @@
 <template>
   <div class="wrap">
-    <form action="post" @submit="onSubmit" autocomplete=“off” class="uploadForm">
+    <form action="post" @submit="onSubmit" class="uploadForm">
       <div class="title">
         <label for="title">文章标题</label>
-        <input type="text" id="title">
+        <input type="text" id="title" :value="title">
       </div>
       <div class="author">
         <label for="author">文章作者</label>
-        <input type="text" id="author">
+        <input type="text" id="author" :value="author">
       </div>
       <div class="upload">
         <label for="upload">上传文件</label>
-        <input type="file" value="" id="upload">
+        <input type="file" value="" id="upload" @change="getInfo">
       </div>
       <button type="submit">上传博客</button>
     </form>
@@ -23,37 +23,35 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'BlogUpload',
+  data() {
+    return {
+      title: '',
+      author: 'violateer'
+    };
+  },
   methods: {
     // 提交事件
-    onSubmit(e) {
+    async onSubmit(e) {
       e.preventDefault();
       let formData = new FormData();
+      let extraData = {
+        title: this.title,
+        author: this.author
+      };
       formData.append('file', e.target[2].files[0]);
+      formData.append('extraData', JSON.stringify(extraData));
       const config = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
-      this.$api.uploadFile(formData, config).then(function (response) {
-        console.log(response.data);
-      });
-      // 上传文件配置
-      // uploadConfig(e) {
-      //   let formData = new FormData();
-      //   let data = JSON.stringify({
-      //     user: 'username',
-      //     env: 'dev'
-      //   });
-      //   formData.append('file', e.target.files[0]);
-      //   formData.append('data', data);   // 上传文件的同时， 也可以上传其他数据
-      //   let url = this.$store.state.path + 'api/tools/handle_upload_file';
-      //   let config = {
-      //     headers: {'Content-Type': 'multipart/form-data'}
-      //   };
-      //   this.$axios.post(url, formData, config).then(function (response) {
-      //     console.log(response.data);
-      //
-      //   });
-
-      // }
+      const {data, code} = await this.$api.uploadFile(formData, config);
+      if (code === 201) {
+        alert(`${data.msg}`);
+        this.$router.go(0);
+      }
+    },
+    // 获取文件信息
+    getInfo(e) {
+      this.title = e.target.files[0].name.split('.')[0];
     }
   }
 });
@@ -80,6 +78,7 @@ export default Vue.extend({
         padding-top: 4px;
         padding-left: 10px;
         width: 180px;
+        font-size: 16px;
       }
     }
 
@@ -105,9 +104,12 @@ export default Vue.extend({
 
   input {
     outline: none;
-    background-color: #eee;
-    border-color: #eee;
+    background-color: #fff;
+    border: 1px solid #eee;
     width: 185px;
+    text-align: center;
+    font-size: 20px;
+
   }
 }
 </style>

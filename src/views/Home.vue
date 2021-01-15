@@ -7,6 +7,7 @@
           :review-num="article.reviewNum"
           :page-views="article.pageViews"
           :date="article.createdAt"
+          :path="article.md"
           :key="index"
     />
     <Calender class="calender"/>

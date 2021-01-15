@@ -28,12 +28,13 @@
     <div class="content">
       <p>{{ content }}</p>
     </div>
-    <button class="btn">Read More</button>
+    <button class="btn" @click="readMore">Read More</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import {mapGetters} from 'vuex';
 
 export default Vue.extend({
   name: 'Card',
@@ -43,7 +44,8 @@ export default Vue.extend({
     author: String,
     reviewNum: Number,
     pageViews: Number,
-    content: String
+    content: String,
+    path: String
   },
   data() {
     return {};
@@ -51,6 +53,13 @@ export default Vue.extend({
   computed: {
     editDate() {
       return this.date.substring(0, 10);
+    }
+  },
+  methods: {
+    async readMore() {
+      const modifiedPath = this.path.split('\\').join('/');
+      const data = await this.$api.getMd(`/${modifiedPath}`);
+      console.log(data);
     }
   }
 });

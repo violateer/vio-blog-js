@@ -54,7 +54,7 @@ const errorHandler = (error) => {
 request.interceptors.response.use((response) => {
     const dataAxios = response.data;
     // 这个状态码是和后端约定的
-    const { code } = dataAxios;
+    const code = response.code;
     // 根据 code 进行判断
     if (code === undefined) {
         // 如果没有 code 代表这不是项目后端开发的接口
@@ -64,14 +64,17 @@ request.interceptors.response.use((response) => {
         // 有 code 代表这是一个后端接口 可以进行进一步的判断
         switch (code) {
             case 200:
-                // [ 示例 ] code === 200 代表没有错误
+                // [ 示例 ] code === 200 请求成功
+                return dataAxios.data;
+            case 201:
+                // [ 示例 ] code === 200 创建成功
                 return dataAxios.data;
             case 404:
                 // [ 示例 ] 其它和后台约定的 code
                 return code;
             default:
                 // 不是正确的 code
-                return '不是正确的code';
+                return '不是正确的code' + code;
         }
     }
 }, errorHandler);

@@ -5,5 +5,9 @@ export default {
     getArticles: () => request.get('/api/articles'),
     
     // 上传文件
-    uploadFile: ( formData, config) => request.post('/api/articles', formData, config)
+    uploadFile: (formData, config) => request.post('/api/articles', formData, config),
+    
+    // 获取md文件
+    getMd: (url) => request.get(`/api/articles${url}`)
+    
 };
