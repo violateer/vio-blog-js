@@ -11,7 +11,7 @@
       </div>
       <div class="upload">
         <label for="upload">上传文件</label>
-        <input type="file" value="" id="upload" @change="uploadConfig">
+        <input type="file" value="" id="upload">
       </div>
       <button type="submit">上传博客</button>
     </form>
@@ -27,26 +27,33 @@ export default Vue.extend({
     // 提交事件
     onSubmit(e) {
       e.preventDefault();
-      console.log(e);
-    },
-    // 上传文件配置
-    uploadConfig(e) {
       let formData = new FormData();
-      let data = JSON.stringify({
-        user: 'username',
-        env: 'dev'
-      });
-      formData.append('file', e.target.files[0]);
-      formData.append('data', data);   // 上传文件的同时， 也可以上传其他数据
-      let url = this.$store.state.path + 'api/tools/handle_upload_file';
-      let config = {
+      formData.append('file', e.target[2].files[0]);
+      const config = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
-      this.$axios.post(url, formData, config).then(function (response) {
+      this.$api.uploadFile(formData, config).then(function (response) {
         console.log(response.data);
-
       });
+      // 上传文件配置
+      // uploadConfig(e) {
+      //   let formData = new FormData();
+      //   let data = JSON.stringify({
+      //     user: 'username',
+      //     env: 'dev'
+      //   });
+      //   formData.append('file', e.target.files[0]);
+      //   formData.append('data', data);   // 上传文件的同时， 也可以上传其他数据
+      //   let url = this.$store.state.path + 'api/tools/handle_upload_file';
+      //   let config = {
+      //     headers: {'Content-Type': 'multipart/form-data'}
+      //   };
+      //   this.$axios.post(url, formData, config).then(function (response) {
+      //     console.log(response.data);
+      //
+      //   });
 
+      // }
     }
   }
 });
