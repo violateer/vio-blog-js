@@ -18,18 +18,18 @@
 import Vue from 'vue';
 import Card from '@/components/Card.vue';
 import Calender from '@/components/Calender.vue';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'Home',
   computed: {
     ...mapGetters({
-      articles: 'articles/watchArticles',
+      articles: 'articles/watchArticles'
     })
   },
   components: {
     Card,
-    Calender,
+    Calender
   }
 });
 </script>

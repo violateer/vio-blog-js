@@ -28,11 +28,13 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      toggleShow: 'dialog/actionGetIsShow'
+      toggleShow: 'dialog/actionGetIsShow',
+      refreshArticles: 'articles/actionRequestArticles'
     }),
     confirmHandler () {
       this.toggleShow(false);
       if (this.code >= 200 && this.code < 300) {
+        this.refreshArticles();
         this.$router.push('/');
       }
     }
