@@ -15,17 +15,21 @@ const getters = {
 
 // 改变state值的
 const mutations = {
-    // 除了传state，还可以传额外的参数
-    async requestArticles (state) {
+    // 获取文章
+    async requestArticles (state, options) {
         const { data } = await api.getArticles();
-        state.articles = [...state.articles, ...data.articles];
+        if (options === 'refresh') {
+            state.articles = data.articles;
+        } else {
+            state.articles = [...state.articles, ...data.articles];
+        }
     }
 };
 
 // 自定义触发mutations里函数的方法，context与store 实例具有相同方法和属性
 const actions = {
-    actionRequestArticles (context) {
-        context.commit('requestArticles');
+    actionRequestArticles (context, options) {
+        context.commit('requestArticles', options);
     }
 };
 

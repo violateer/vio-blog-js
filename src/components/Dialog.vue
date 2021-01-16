@@ -34,7 +34,7 @@ export default Vue.extend({
     confirmHandler () {
       this.toggleShow(false);
       if (this.code >= 200 && this.code < 300) {
-        this.refreshArticles();
+        this.refreshArticles('refresh');
         this.$router.push('/');
       }
     }
