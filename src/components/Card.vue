@@ -34,7 +34,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {mapGetters} from 'vuex';
 
 export default Vue.extend({
   name: 'Card',
@@ -47,9 +46,6 @@ export default Vue.extend({
     content: String,
     path: String
   },
-  data() {
-    return {};
-  },
   computed: {
     editDate() {
       return this.date.substring(0, 10);
@@ -60,6 +56,15 @@ export default Vue.extend({
       const modifiedPath = this.path.split('\\').join('/');
       const data = await this.$api.getMd(`${modifiedPath}`);
       console.log(data);
+    },
+    // 弹窗事件
+    hideDialog() {
+      // 取消弹窗回调
+      this.isShow = false;
+    },
+    submit() {
+      // 确认弹窗回调
+      this.isShow = false;
     }
   }
 });
