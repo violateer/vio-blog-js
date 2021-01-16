@@ -1,47 +1,52 @@
 <template>
-  <div class="dialog-bg" v-show="isShow">
-    <div class="dialog-container">
-      <div class="dialog-header">
-        {{ title }}
-      </div>
-      <div class="dialog-main">
-        <slot></slot>
-      </div>
-      <div class="dialog-footer">
-        <button class="btn-cancel" @click="hideDialog">取消</button>
-        <button class="btn-confirm" @click="submit">确认</button>
+  <transition name="fade">
+    <div class="dialog-bg" v-show="isShow">
+      <div class="dialog-container">
+        <div class="dialog-header">
+          {{ dialogTitle }}
+        </div>
+        <div class="dialog-main">
+          <slot></slot>
+        </div>
+        <div class="dialog-footer">
+          <!--        <button class="btn-cancel" @click="hideDialog">取消</button>-->
+          <button class="btn-confirm" @click="toggleShow(false)">确认</button>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="js">
 import Vue from 'vue';
+import { mapActions, mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'Dialog',
-  props: {
-    isShow: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: ''
-    }
-  },
   methods: {
-    hideDialog () {
-      this.$emit('hideDialog');
-    },
-    submit () {
-      this.$emit('submit');
-    }
+    ...mapActions({
+      toggleShow: 'dialog/actionGetIsShow'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      dialogTitle: 'dialog/getTitle',
+      isShow: 'dialog/getIsShow'
+    })
+
   }
 });
 </script>
 
 <style lang="scss" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 .dialog-bg {
   position: fixed;
   top: 0;
@@ -50,6 +55,7 @@ export default Vue.extend({
   height: 100%;
   background: rgba(0, 0, 0, .5);
   z-index: 10;
+  transition: opacity .5s;
 
   .dialog-container {
     background: #fff;

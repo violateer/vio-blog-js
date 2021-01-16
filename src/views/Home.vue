@@ -1,6 +1,6 @@
 <template>
   <div class="home w init">
-    <Card v-for="(article,index) in getArticles"
+    <Card v-for="(article,index) in articles"
           :title="article.title"
           :author="article.author"
           :content="article.content"
@@ -11,10 +11,6 @@
           :key="index"
     />
     <Calender class="calender"/>
-    <!--  放置弹窗-->
-    <Dialog :isShow="isShow" :title="dialogTitle" @hideDialog="hideDialog" @submit="submit">
-      <p>这里放弹窗的内容</p>
-    </Dialog>
   </div>
 </template>
 
@@ -22,36 +18,18 @@
 import Vue from 'vue';
 import Card from '@/components/Card.vue';
 import Calender from '@/components/Calender.vue';
-import Dialog from '@/components/Dialog';
 import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'Home',
-  data () {
-    return {
-      // 弹窗
-      dialogTitle: '标题',
-      isShow: true
-    };
-  },
   computed: {
-    ...mapGetters({ getArticles: 'articles/watchArticles' })
-  },
-  methods: {
-    // 弹窗事件
-    hideDialog () {
-      // 取消弹窗回调
-      this.isShow = false;
-    },
-    submit () {
-      // 确认弹窗回调
-      this.isShow = false;
-    }
+    ...mapGetters({
+      articles: 'articles/watchArticles',
+    })
   },
   components: {
     Card,
     Calender,
-    Dialog
   }
 });
 </script>

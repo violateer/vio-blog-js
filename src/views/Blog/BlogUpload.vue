@@ -15,18 +15,25 @@
       </div>
       <button type="submit">上传博客</button>
     </form>
+    <!--  放置弹窗-->
+    <Dialog :isShow="isShow" :dialogTitle="dialogTitle" class="dialog">
+      <p>{{ dialogContent }}</p>
+    </Dialog>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import Dialog from '../../components/Dialog.vue';
+import {mapActions, mapGetters} from 'vuex';
 
 export default Vue.extend({
   name: 'BlogUpload',
   data() {
     return {
       title: '',
-      author: 'violateer'
+      author: 'violateer',
+      dialogContent: ''
     };
   },
   methods: {
@@ -35,11 +42,15 @@ export default Vue.extend({
       e.preventDefault();
       // 判断是否存在要上传的文件
       if (!this.title) {
-        alert('标题不能为空');
+        this.dialogContent = '请输入标题';
+        this.setTitle('警告');
+        this.toggleShow(true);
         return;
       }
       if (e.target[2].files.length === 0) {
-        alert('请选择要上传的文件');
+        this.dialogContent = '请选择要上传的文件';
+        this.setTitle('警告');
+        this.toggleShow(true);
         return;
       }
 
@@ -62,7 +73,21 @@ export default Vue.extend({
     // 获取文件信息
     getInfo(e) {
       this.title = e.target.files[0].name.split('.')[0];
-    }
+    },
+    // 弹窗
+    ...mapActions({
+      toggleShow: 'dialog/actionGetIsShow',
+      setTitle: 'dialog/actionGetTitle'
+    })
+  },
+  computed: {
+    ...mapGetters({
+      dialogTitle: 'dialog/getTitle',
+      isShow: 'dialog/getIsShow'
+    })
+  },
+  components: {
+    Dialog
   }
 });
 </script>
@@ -121,5 +146,10 @@ export default Vue.extend({
     font-size: 20px;
 
   }
+}
+
+.dialog p {
+  text-align: center;
+  font-size: 18px;
 }
 </style>

@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import test from '@/store/modules/test';
+import dialog from '@/store/modules/dialog';
 import articles from '@/store/modules/articles';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
     modules: {
-        test,
+        dialog,
         articles
     }
 });
