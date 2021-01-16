@@ -16,7 +16,7 @@
       <button type="submit">上传博客</button>
     </form>
     <!--  放置弹窗-->
-    <Dialog :isShow="isShow" :dialogTitle="dialogTitle" class="dialog">
+    <Dialog :isShow="isShow" :dialogTitle="dialogTitle" :code="code" class="dialog">
       <p>{{ dialogContent }}</p>
     </Dialog>
   </div>
@@ -33,7 +33,8 @@ export default Vue.extend({
     return {
       title: '',
       author: 'violateer',
-      dialogContent: ''
+      dialogContent: '',
+      code: -1
     };
   },
   methods: {
@@ -69,6 +70,7 @@ export default Vue.extend({
       const {data, code} = await this.$api.uploadFile(formData, config);
       if (code === 201) {
         this.showDialog('消息', data.msg);
+        this.code = code;
       }
     },
     // 获取文件信息

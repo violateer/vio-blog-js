@@ -23,13 +23,18 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'Dialog',
+  props: {
+    code: Number
+  },
   methods: {
     ...mapActions({
       toggleShow: 'dialog/actionGetIsShow'
     }),
     confirmHandler () {
       this.toggleShow(false);
-      this.$router.go(0);
+      if (this.code >= 200 && this.code < 300) {
+        this.$router.push('/');
+      }
     }
   },
   computed: {
