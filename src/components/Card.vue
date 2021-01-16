@@ -58,7 +58,7 @@ export default Vue.extend({
   methods: {
     async readMore() {
       const modifiedPath = this.path.split('\\').join('/');
-      const data = await this.$api.getMd(`/${modifiedPath}`);
+      const data = await this.$api.getMd(`${modifiedPath}`);
       console.log(data);
     }
   }

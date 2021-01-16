@@ -3,15 +3,15 @@
     <form action="post" @submit="onSubmit" class="uploadForm">
       <div class="title">
         <label for="title">文章标题</label>
-        <input type="text" id="title" :value="title">
+        <input type="text" id="title" v-model:value="title">
       </div>
       <div class="author">
         <label for="author">文章作者</label>
-        <input type="text" id="author" :value="author">
+        <input type="text" id="author" v-model:value="author">
       </div>
       <div class="upload">
         <label for="upload">上传文件</label>
-        <input type="file" value="" id="upload" @change="getInfo">
+        <input type="file" id="upload" @change="getInfo">
       </div>
       <button type="submit">上传博客</button>
     </form>
@@ -33,6 +33,16 @@ export default Vue.extend({
     // 提交事件
     async onSubmit(e) {
       e.preventDefault();
+      // 判断是否存在要上传的文件
+      if (!this.title) {
+        alert('标题不能为空');
+        return;
+      }
+      if (e.target[2].files.length === 0) {
+        alert('请选择要上传的文件');
+        return;
+      }
+
       let formData = new FormData();
       let extraData = {
         title: this.title,
