@@ -10,7 +10,7 @@
         </div>
         <div class="dialog-footer">
           <!--        <button class="btn-cancel" @click="hideDialog">取消</button>-->
-          <button class="btn-confirm" @click="toggleShow(false)">确认</button>
+          <button class="btn-confirm" @click="confirmHandler">确认</button>
         </div>
       </div>
     </div>
@@ -26,7 +26,11 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       toggleShow: 'dialog/actionGetIsShow'
-    })
+    }),
+    confirmHandler () {
+      this.toggleShow(false);
+      this.$router.go(0);
+    }
   },
   computed: {
     ...mapGetters({

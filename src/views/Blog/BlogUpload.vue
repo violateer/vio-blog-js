@@ -37,20 +37,22 @@ export default Vue.extend({
     };
   },
   methods: {
+    // 封装弹窗控制
+    showDialog(title, content) {
+      this.dialogContent = content;
+      this.setTitle(title);
+      this.toggleShow(true);
+    },
     // 提交事件
     async onSubmit(e) {
       e.preventDefault();
       // 判断是否存在要上传的文件
       if (!this.title) {
-        this.dialogContent = '请输入标题';
-        this.setTitle('警告');
-        this.toggleShow(true);
+        this.showDialog('警告', '请输入文件名');
         return;
       }
       if (e.target[2].files.length === 0) {
-        this.dialogContent = '请选择要上传的文件';
-        this.setTitle('警告');
-        this.toggleShow(true);
+        this.showDialog('警告', '请选择要上传的文件');
         return;
       }
 
@@ -66,8 +68,7 @@ export default Vue.extend({
       };
       const {data, code} = await this.$api.uploadFile(formData, config);
       if (code === 201) {
-        alert(`${data.msg}`);
-        this.$router.go(0);
+        this.showDialog('消息', data.msg);
       }
     },
     // 获取文件信息
