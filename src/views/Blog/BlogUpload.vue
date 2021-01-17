@@ -13,6 +13,29 @@
         <label for="upload">上传文件</label>
         <input type="file" id="upload" @change="getInfo">
       </div>
+      <!--      选择标签-->
+      <div class="labels">
+        <label>选择分类</label>
+        <div class="select-labels">
+          <el-tag :key="tag"
+                  closable
+                  v-for="tag in dynamicTags"
+                  @close="handleClose(tag)"
+                  type="info"
+          >{{ tag }}
+          </el-tag>
+          <el-input class="input-new-tag"
+                    v-if="inputVisible"
+                    v-model="inputValue"
+                    ref="saveTagInput"
+                    size="small"
+                    @keyup.enter.native="handleInputConfirm"
+                    @blur="handleInputConfirm"
+          >
+          </el-input>
+          <el-button v-else class="button-new-tag" size="small" @click="showInput" type="info">+ New Tag</el-button>
+        </div>
+      </div>
       <button type="submit">上传博客</button>
     </form>
     <!--  放置弹窗-->
@@ -25,6 +48,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Dialog from '../../components/Dialog.vue';
+import Label from '../../components/Label.vue';
 import {mapActions, mapGetters} from 'vuex';
 
 export default Vue.extend({
@@ -34,7 +58,10 @@ export default Vue.extend({
       title: '',
       author: 'violateer',
       dialogContent: '',
-      code: -1
+      code: -1,
+      dynamicTags: ['vue', 'react', 'nodejs'],
+      inputVisible: false,
+      inputValue: ''
     };
   },
   methods: {
@@ -64,6 +91,7 @@ export default Vue.extend({
       };
       formData.append('file', e.target[2].files[0]);
       formData.append('extraData', JSON.stringify(extraData));
+      formData.append('labels', this.dynamicTags);
       const config = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
@@ -81,7 +109,27 @@ export default Vue.extend({
     ...mapActions({
       toggleShow: 'dialog/actionGetIsShow',
       setTitle: 'dialog/actionGetTitle'
-    })
+    }),
+    // 标签
+    handleClose(tag) {
+      this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+    },
+
+    showInput() {
+      this.inputVisible = true;
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
+    },
+
+    handleInputConfirm() {
+      let inputValue = this.inputValue;
+      if (inputValue) {
+        this.dynamicTags.push(inputValue);
+      }
+      this.inputVisible = false;
+      this.inputValue = '';
+    }
   },
   computed: {
     ...mapGetters({
@@ -90,7 +138,8 @@ export default Vue.extend({
     })
   },
   components: {
-    Dialog
+    Dialog,
+    Label
   }
 });
 </script>
@@ -100,23 +149,35 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 150px 0;
+  margin: 100px 0;
 
   .uploadForm {
-    width: 800px;
+    width: 100%;
     position: relative;
 
-    div {
+    > div {
       margin-left: 50%;
-      transform: translateX(-50%);
+      transform: translateX(-35%);
       display: flex;
       margin-bottom: 50px;
 
       #upload {
-        padding-top: 4px;
-        padding-left: 10px;
+        padding: 4px 10px;
         width: 180px;
         font-size: 16px;
+      }
+
+      .select-labels {
+        padding: 4px 10px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .el-tag {
+          margin-right: 8px;
+          cursor: pointer;
+        }
       }
     }
 
@@ -127,10 +188,12 @@ export default Vue.extend({
       width: 100px;
       vertical-align: top;
       font-size: 20px;
+      height: 30px;
+      line-height: 30px;
     }
 
 
-    button {
+    > button {
       position: absolute;
       left: 50%;
       transform: translateX(-80%);
@@ -144,7 +207,7 @@ export default Vue.extend({
     outline: none;
     background-color: #fff;
     border: 1px solid #eee;
-    width: 185px;
+    width: 200px;
     text-align: center;
     font-size: 20px;
 
