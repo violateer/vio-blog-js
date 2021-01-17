@@ -19,7 +19,7 @@
 import Vue from 'vue';
 import Card from '@/components/Card.vue';
 import Calender from '@/components/Calender.vue';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: 'Home',

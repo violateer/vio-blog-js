@@ -10,7 +10,9 @@ import '@/assets/css/global.css';
 // 引入iconfont
 import '@/fonts/iconfont.js';
 // 引入element-ui
-import { Tag, Button, Input } from 'element-ui';
+import { Tag, Button, Input, Form } from 'element-ui';
+// 代码高亮
+import Highlight from 'vue-markdown-highlight';
 
 Vue.config.productionTip = false;
 Vue.prototype.$api = api;
@@ -18,6 +20,9 @@ Vue.prototype.$api = api;
 Vue.use(Tag);
 Vue.use(Button);
 Vue.use(Input);
+Vue.use(Form);
+
+Vue.use(Highlight);
 
 new Vue({
     router,

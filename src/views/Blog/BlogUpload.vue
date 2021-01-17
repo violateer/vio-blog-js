@@ -24,15 +24,14 @@
                   type="info"
           >{{ tag }}
           </el-tag>
-          <el-input class="input-new-tag"
-                    v-if="inputVisible"
-                    v-model="inputValue"
-                    ref="saveTagInput"
-                    size="small"
-                    @keyup.enter.native="handleInputConfirm"
-                    @blur="handleInputConfirm"
-          >
-          </el-input>
+          <input class="label-input"
+                 type="text"
+                 v-if="inputVisible"
+                 v-model="inputValue"
+                 ref="saveTagInput"
+                 @blur="handleInputConfirm"
+                 @keyup="handleInputEnterConfirm"
+                 @keydown="handleInputEnterConfirm">
           <el-button v-else class="button-new-tag" size="small" @click="showInput" type="info">+ New Tag</el-button>
         </div>
       </div>
@@ -95,10 +94,13 @@ export default Vue.extend({
       const config = {
         headers: {'Content-Type': 'multipart/form-data'}
       };
+
       const {data, code} = await this.$api.uploadFile(formData, config);
       if (code === 201) {
         this.showDialog('消息', data.msg);
         this.code = code;
+      } else {
+        console.log(code);
       }
     },
     // 获取文件信息
@@ -114,14 +116,17 @@ export default Vue.extend({
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
-
     showInput() {
       this.inputVisible = true;
       this.$nextTick(_ => {
-        this.$refs.saveTagInput.$refs.input.focus();
+        this.$refs.saveTagInput.focus();
       });
     },
-
+    handleInputEnterConfirm(e) {
+      if (e.keyCode === 13) {
+        this.handleInputConfirm();
+      }
+    },
     handleInputConfirm() {
       let inputValue = this.inputValue;
       if (inputValue) {
@@ -129,6 +134,11 @@ export default Vue.extend({
       }
       this.inputVisible = false;
       this.inputValue = '';
+      return false;
+    },
+    // 阻止回车提交
+    preventSubmit(e) {
+      return false;
     }
   },
   computed: {
@@ -177,6 +187,13 @@ export default Vue.extend({
         .el-tag {
           margin-right: 8px;
           cursor: pointer;
+        }
+
+        .label-input {
+          width: 95px;
+          height: 100%;
+          border-radius: 5px;
+          font-size: 16px;
         }
       }
     }

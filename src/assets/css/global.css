@@ -17,10 +17,6 @@ body {
     min-height: 100%;
 }
 
-ul, li, ol {
-    list-style: none;
-}
-
 img {
     border-style: none;
 }
@@ -50,4 +46,20 @@ a {
 .init {
     margin-top: 60px;
     position: relative;
+}
+
+/* 调整行号插件 */
+.hljs-line-numbers {
+    text-align: right;
+    /*以下3行要加 !important 来避免样式覆盖*/
+    border-right: 1px solid #ccc !important;
+    margin-right: 10px !important;
+    padding-right: 5px !important;
+    color: #999;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

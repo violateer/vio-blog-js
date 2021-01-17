@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="title">
-      <a href="#">{{ title }}</a>
+      <a :href="`/blog/articles/${id}`">{{ title }}</a>
       <div class="description">
         <a href="#" class="date">
           <svg class="icon" aria-hidden="true">
@@ -53,9 +53,8 @@ export default Vue.extend({
     }
   },
   methods: {
-    async readMore() {
-      const data = await this.$api.getMd(`${this.id}`);
-      await this.$router.push(`/blog/articles/${this.id}`);
+    readMore() {
+      this.$router.push(`/blog/articles/${this.id}`);
     }
   }
 });
@@ -93,16 +92,17 @@ export default Vue.extend({
   .content {
     margin-top: 20px;
     padding-top: 20px;
+    color: #5a5a5a;
 
     p {
       display: -webkit-box;
       width: 770px;
       height: 130px;
-      //background-color: green;
-      font-size: 24px;
+      font-size: 20px;
+      letter-spacing: 4px;
       overflow: hidden;
       text-overflow: ellipsis;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 5;
       -webkit-box-orient: vertical;
     }
   }
