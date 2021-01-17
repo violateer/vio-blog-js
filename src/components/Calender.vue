@@ -29,7 +29,7 @@ export default Vue.extend({
       const lang = navigator.language;
       const date = new Date();
 
-      this.dayNumber = date.getDay();
+      this.dayNumber = date.getDate();
       this.month = date.getMonth();
       this.dayName = date.toLocaleString(lang, { weekday: 'long' });
       this.monthName = date.toLocaleString(lang, { month: 'long' });
