@@ -54,9 +54,8 @@ export default Vue.extend({
   },
   methods: {
     async readMore() {
-      const modifiedPath = this.path.split('\\').join('/');
-      const data = await this.$api.getMd(`${modifiedPath}`);
-      this.$router.push(`/blog/articles/${this.id}`);
+      const data = await this.$api.getMd(`${this.id}`);
+      await this.$router.push(`/blog/articles/${this.id}`);
     }
   }
 });

@@ -8,6 +8,6 @@ export default {
     uploadFile: (formData, config) => request.post('/api/articles', formData, config),
     
     // 获取md文件
-    getMd: (url) => request.get(`/api/articles${url}`)
+    getMd: (id) => request.get(`/api/articles/${id}`)
     
 };
