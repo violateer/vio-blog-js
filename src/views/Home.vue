@@ -8,6 +8,7 @@
           :page-views="article.pageViews"
           :date="article.createdAt"
           :path="article.md"
+          :id="article._id"
           :key="index"
     />
     <Calender class="calender"/>

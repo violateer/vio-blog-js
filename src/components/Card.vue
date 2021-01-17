@@ -44,7 +44,8 @@ export default Vue.extend({
     reviewNum: Number,
     pageViews: Number,
     content: String,
-    path: String
+    path: String,
+    id: String
   },
   computed: {
     editDate() {
@@ -55,7 +56,7 @@ export default Vue.extend({
     async readMore() {
       const modifiedPath = this.path.split('\\').join('/');
       const data = await this.$api.getMd(`${modifiedPath}`);
-      console.log(data);
+      this.$router.push(`/blog/articles/${this.id}`);
     }
   }
 });

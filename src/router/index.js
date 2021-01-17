@@ -23,6 +23,11 @@ const routes = [
                 path: 'upload',
                 name: 'Upload',
                 component: () => import(/* webpackChunkName: "BlogUpload" */ '../views/Blog/BlogUpload.vue')
+            },
+            {
+                path: 'articles/:id',
+                name: 'Article',
+                component: () => import(/* webpackChunkName: "Article" */ '../views/Blog/Article.vue')
             }
         ]
     },
